@@ -1,0 +1,225 @@
+<div ng-switch="luaChon">
+    <div class="ui-view" ng-switch-when="1">
+        <div class="quizz-main">
+            <div class="quizz-header">
+                <div class="quizz-nav d-flex justify-content-between p-4"
+                    style="background-color: rgba(40, 39, 39, 0.767);">
+                    <div class="quizz-nav-left">
+                        <button class="btn-tinh" id="cauHoanThanh" data-bs-toggle="tooltip" data-bs-placement="top"
+                            data-bs-title="Số câu hoàn thiện">{{soCauTlDung}}/{{filteredResults.length}}</button>
+                    </div>
+                    <div class="quizz-nav-mid">
+                        <button class="btn-tinh">{{subject.Name}}</button>
+                    </div>
+                    <div class="quizz-nav-right">
+                        <button class="btn-tinh" data-bs-toggle="modal" data-bs-target="#modalKetThuc">Kết thúc</button>
+                        <button class="btn-tinh" id="thoiGian" data-bs-toggle="tooltip" data-bs-placement="top"
+                            data-bs-title="Thời gian còn lại">{{counter}}</button>
+                    </div>
+                </div>
+                <div class="quizz-time">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuemin="0" ng-style="{'width':phanTram+'%'}"
+                            aria-valuemax="100">{{phanTram}}%</div>
+                    </div>
+                </div>
+            </div>
+            <div class="quizz-container container" ng-init="filteredResults">
+                <div class="quizz-main" ng-repeat="item in filteredResults = (cauChon)| limitTo:1:begin ">
+                    <div class="quizz-question m-5 p-5 rounded" style="background-color: #333333de;position: relative;">
+                        <div class="quizz-question-main text-center text-wrap animationPanel" style="font-size: 20px;">
+                            <p>Câu {{begin + 1}}: {{item.Text}}</p>
+                        </div>
+                    </div>
+                    <div class="quizz-options container d-flex justify-content-evenly flex-wrap">
+                        <button class="learn-more mx-5 my-4 animationPanel" ng-repeat="answer in item.Answers"
+                            ng-click="check(item.AnswerId, answer.Id, item.Id)">{{$index + 1}}. {{answer.Text}}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="quizz-footer">
+                <nav style="width: 100%; margin: 50px 0;padding: 0 50px;" ng-if="filteredResults != 0"
+                    aria-label="Page navigation example">
+                    <ul class="pagination container d-flex justify-content-center flex-wrap">
+                        <!-- <li class="page-item" ng-click="prev()">
+                            <a class="btn page-link">Previous</a>
+                        </li> -->
+                        <li ng-repeat="item in cauChon" class="page-item">
+                            <a class="btn page-link active" ng-if="begin == $index" ng-click="index($index)">{{$index
+                                + 1}}</a>
+                            <a class="btn page-link" ng-if="begin != $index && item.answered == true && item.Mark == -1"
+                                style="background-color: red !important; color: #fff;" ng-click="index($index)">{{$index
+                                +
+                                1}}</a>
+                            <a class="btn page-link" ng-if="begin != $index && item.answered == true && item.Mark == 1"
+                                style="background-color: rgb(34, 255, 0)!important; color: #000;"
+                                ng-click="index($index)">{{$index +
+                                1}}</a>
+                            <a class="btn page-link" ng-if="begin != $index && item.answered != true&& item.Mark == 0"
+                                ng-click="index($index)">{{$index +
+                                1}}</a>
+                        </li>
+                        <!-- <li class="page-item" ng-click="next(filteredResults.length)">
+                            <a class="btn page-link">Next</a>
+                        </li> -->
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="ui-view" ng-switch-when="2"
+        style="background-color: #fff; color: #000; width: 800px; margin-left: auto; margin-right: auto; padding: 50px;min-height: 500px;">
+        <div class="chi-tiet-mon-hoc">
+            <h1 class="text-center">CHI TIẾT MÔN HỌC</h1>
+            <div class="text-center m-5"><img ng-src="../img/{{subject.Logo}}" alt=""></div>
+            <div class="mb-3 row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Tên Môn</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control" value="{{subject.Name}}">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Thời gian</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control" value="{{timeBatDau}} Giây">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Số câu hỏi</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control" value="{{cauChon.length}}">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Số huy chương</label>
+                <div class="col-sm-10">
+                    <div class="form-control-plaintext">
+                        <i ng-repeat="n in [] | range:cauChon.length" class="fa-solid fa-medal"
+                            style="color: rgb(0, 255, 123);font-size: 40px;"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="staticEmail" class="col-sm-2 col-form-label fst-italic text-danger">*Note</label>
+                <div class="col-sm-10">
+                    <div class="form-control-plaintext fst-italic text-danger"> Sau khi hoàn thành xong bài quizz với số
+                        câu trả lời đúng mọi người sẽ được số huy chương tương ứng
+                    </div>
+                </div>
+            </div>
+            <div class="float-end">
+                <a class="btn btn-main text-center" data-bs-toggle="modal" data-bs-target="#modalBatDau">GET START</a>
+                <a href="#subjects" class="btn btn-main text-center">THOÁT</a>
+            </div>
+        </div>
+    </div>
+    <div class="ui-view" ng-switch-when="3"
+    style="background-color: #fff; color: #000; width: 800px; margin-left: auto; margin-right: auto; padding: 50px;min-height: 500px;">
+    <div class="chi-tiet-mon-hoc">
+        <h1 class="text-center pb-4">KẾT THÚC BÀI THI</h1>
+        <div class="mb-3 row">
+            <label for="staticEmail" class="col-sm-2 col-form-label">Họ tên</label>
+            <div class="col-sm-10">
+                <input type="text" readonly class="form-control" value="{{student.fullname}}">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="staticEmail" class="col-sm-2 col-form-label">Tên môn</label>
+            <div class="col-sm-10">
+                <input type="text" readonly class="form-control" value="{{subject.Name}}">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="staticEmail" class="col-sm-2 col-form-label">Thời gian thi</label>
+            <div class="col-sm-10">
+                <input type="text" readonly class="form-control" value="{{timeBatDau - counter}} Giây">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="staticEmail" class="col-sm-2 col-form-label">Điểm số</label>
+            <div class="col-sm-10">
+                <input type="text" readonly class="form-control" value="{{soCauTlDung}} / {{cauChon.length}}">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="staticEmail" class="col-sm-2 col-form-label">Huy chương nhận được</label>
+            <div class="col-sm-10">
+                <div class="form-control-plaintext"> {{soCauTlDung}}
+                    <i class="fa-solid fa-medal"
+                        style="color: rgb(0, 255, 123);font-size: 40px;"></i>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="staticEmail" class="col-sm-2 col-form-label">Huy chương hiện có</label>
+            <div class="col-sm-10">
+                <div class="form-control-plaintext"> {{student.marks}}
+                    <i class="fa-solid fa-medal"
+                        style="color: rgb(0, 255, 123);font-size: 40px;"></i>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="staticEmail"
+                class="col-sm-2 col-form-label fst-italic text-danger">*Note</label>
+            <div class="col-sm-10">
+                <div class="form-control-plaintext fst-italic text-danger"> Sau khi hoàn thành xong bài
+                    quizz với số
+                    câu trả lời đúng mọi người sẽ được số huy chương tương ứng
+                </div>
+            </div>
+        </div>
+        <div class="float-end">
+            <a class="btn btn-main text-center" ng-click="lamLai()">LÀM
+                LẠI</a>
+            <a href="#home" class="btn btn-main text-center">TRANG CHỦ</a>
+            <a href="#subjects" class="btn btn-main text-center">THOÁT</a>
+        </div>
+    </div>
+</div>
+</div>
+<!-- Modal Bắt Đầu -->
+<div class="modal fade" id="modalBatDau" tabindex="-1" aria-labelledby="modalBatDau" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalBatDau">Thông báo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning d-flex align-items-center" role="alert">
+                    <div>
+                        Bạn có chắn chắn muốn tham gia không
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="batDau()" data-bs-dismiss="modal">Bắt đầu
+                    thi</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal kêt thúc -->
+<div class="modal fade" id="modalKetThuc" tabindex="-1" aria-labelledby="modalKetThuc" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalKetThuc">Thông báo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning d-flex align-items-center" role="alert">
+                    <div>
+                        Bạn chắn chắn muốn kết thúc bài Quizz và lưu thành tích.
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="ketThuc()" data-bs-dismiss="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

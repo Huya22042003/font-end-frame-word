@@ -26,7 +26,7 @@
 
 <body ng-app="myApp" ng-app="subject">
     <div id="main" ng-controller="myCtrl">
-        <div id="header" class="sticky-top" style="transition: top 0.3s;">
+        <div id="header" class="sticky-top">
             <nav class="navbar shadow p-2 mb-5 bg-body rounded">
                 <div class="container-fluid">
                     <div>
@@ -35,8 +35,9 @@
                             <i class="fa-solid fa-bars" id="menu" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                 data-bs-title="Menu" style="font-size: 25px;"></i>
                         </button>
-                        <a href="#" class="btn border-0" id="home" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                            data-bs-title="Trang Chủ" style="font-size: 25px; padding: 0;">Hello! {{student.fullname}}</a>
+                        <a href="#home" class="btn border-0" id="home" data-bs-toggle="tooltip"
+                            data-bs-placement="bottom" data-bs-title="Trang Chủ"
+                            style="font-size: 25px; padding: 0;">Hello</a>
                     </div>
                     <div class="dropdown">
                         <button class="btn border-0 dropdown-toggle p-0" type="button" data-bs-toggle="dropdown">
@@ -47,10 +48,9 @@
                             Tài khoản
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
-                            <li ng-if="student"><a class="dropdown-item" href="#information">Thông tin</a></li>
-                            <li ng-if="student"><a class="dropdown-item" ng-click="logOut()" href="#login">Đăng xuất</a></li>
-                            <li ng-if="!student"><a class="dropdown-item" href="#login">Đăng nhập</a></li>
-                            <li ng-if="!student"><a class="dropdown-item" href="#">Đăng ký</a></li>
+                            <li><a class="dropdown-item" href="#">Thông tin</a></li>
+                            <li><a class="dropdown-item" href="#login">Đăng nhập</a></li>
+                            <li><a class="dropdown-item" href="#">Đăng ký</a></li>
                         </ul>
                     </div>
                 </div>
@@ -67,17 +67,23 @@
                     <div class="panel panel-default">
                         <a href="#home" class="cta text-light fw-bold">
                             <span class="hover-underline-animation"> Trang chủ </span>
-                            <svg viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg" id="arrow-horizontal">
-                                <path transform="translate(30)" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" data-name="Path 10" id="Path_10"></path>
+                            <svg viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg"
+                                id="arrow-horizontal">
+                                <path transform="translate(30)"
+                                    d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z"
+                                    data-name="Path 10" id="Path_10"></path>
                             </svg>
                         </a>
                     </div>
-                    
+
                     <div class="panel panel-default">
                         <a href="#questions" class="cta text-light fw-bold">
                             <span class="hover-underline-animation"> Giới thiệu </span>
-                            <svg viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg" id="arrow-horizontal">
-                                <path transform="translate(30)" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" data-name="Path 10" id="Path_10"></path>
+                            <svg viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg"
+                                id="arrow-horizontal">
+                                <path transform="translate(30)"
+                                    d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z"
+                                    data-name="Path 10" id="Path_10"></path>
                             </svg>
                         </a>
                     </div>
@@ -85,8 +91,11 @@
                     <div class="panel panel-default">
                         <a href="#subjects" class="cta text-light fw-bold">
                             <span class="hover-underline-animation"> Danh sách môn học </span>
-                            <svg viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg" id="arrow-horizontal">
-                                <path transform="translate(30)" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" data-name="Path 10" id="Path_10"></path>
+                            <svg viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg"
+                                id="arrow-horizontal">
+                                <path transform="translate(30)"
+                                    d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z"
+                                    data-name="Path 10" id="Path_10"></path>
                             </svg>
                         </a>
                     </div>
@@ -97,18 +106,25 @@
                             <span class="glyphicon glyphicon-list-alt"></span>
                             <a class="cta text-light fw-bold">
                                 <span class="hover-underline-animation"> Môn học </span>
-                                <svg viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg" id="arrow-horizontal">
-                                    <path transform="translate(30)" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" data-name="Path 10" id="Path_10"></path>
+                                <svg viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg"
+                                    id="arrow-horizontal">
+                                    <path transform="translate(30)"
+                                        d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z"
+                                        data-name="Path 10" id="Path_10"></path>
                                 </svg>
                             </a>
                         </div>
                         <ul class="list-group list-group-flush panel-collapse collapse" id="collapseOne"
-                            style="height: 0px;">
-                            <li class="list-group-item tran-parent border-0" ng-repeat="item in subjectsMenu">
+                            ng-repeat="item in subjectsMenu" style="height: 0px;">
+                            <li class="list-group-item tran-parent border-0">
                                 <a class="cta">
-                                    <span class="hover-underline-animation text-light" style="font-size: 12px;     text-shadow: 0 0 10px #000;"> {{item.Name}} </span>
-                                    <svg viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg" id="arrow-horizontal">
-                                        <path transform="translate(30)" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" data-name="Path 10" id="Path_10"></path>
+                                    <span class="hover-underline-animation text-light"
+                                        style="font-size: 12px;     text-shadow: 0 0 10px #000;"> {{item.Name}} </span>
+                                    <svg viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg"
+                                        id="arrow-horizontal">
+                                        <path transform="translate(30)"
+                                            d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z"
+                                            data-name="Path 10" id="Path_10"></path>
                                     </svg>
                                 </a>
                             </li>
@@ -117,7 +133,7 @@
                 </div>
             </div>
         </div>
-        <div id="load" ng-show="loading">
+        <!-- <div id="load" ng-show="loading">
             <div class="wrapper">
                 <div class="circle"></div>
                 <div class="circle"></div>
@@ -126,10 +142,10 @@
                 <div class="shadow-ui"></div>
                 <div class="shadow-ui"></div>
             </div>
-        </div>
+        </div> -->
         <div id="container">
             <div class="container">
-                <ng-view></ng-view>
+
             </div>
         </div>
         <div id="footer">
@@ -195,40 +211,21 @@
             <!-- End of .container -->
         </div>
     </div>
-    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalFullscreenXxlLabel" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen-xxl-down">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title h4" id="exampleModalFullscreenXxlLabel">Thông báo</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center">
-              <strong id="error"></strong>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <script>
-        var prevScrollpos = window.pageYOffset;
-window.onscroll = function() {
-var currentScrollPos = window.pageYOffset;
-  if (prevScrollpos > currentScrollPos) {
-    document.getElementById("header").style.top = "0";
-  } else {
-    document.getElementById("header").style.top = "-80px";
-  }
-  prevScrollpos = currentScrollPos;
-}
-      </script>
-    <script src="../js/custom/controller/pages.js"></script>
-    <script src="../js/custom/controller/loginCotroller.js"></script>
-    <script src="../js/custom/controller/homeController.js"></script>
-    <script src="../js/custom/controller/subjectController.js"></script>
-    <script src="../js/custom/controller/questionCtrl.js"></script>
-    <script src="../js/custom/service/toolTip.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#show_hide_password button").on('click', function (event) {
+                if ($('#show_hide_password input').attr("type") == "text") {
+                    $('#show_hide_password input').attr('type', 'password');
+                    $('#show_hide_password i').addClass("fa-eye-slash");
+                    $('#show_hide_password i').removeClass("fa-eye");
+                } else if ($('#show_hide_password input').attr("type") == "password") {
+                    $('#show_hide_password input').attr('type', 'text');
+                    $('#show_hide_password i').removeClass("fa-eye-slash");
+                    $('#show_hide_password i').addClass("fa-eye");
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

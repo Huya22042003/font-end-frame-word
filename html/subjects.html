@@ -1,0 +1,78 @@
+<div class="ui-view">
+  <div class="p-3" style="background-color: rgba(40, 39, 39, 0.767);">
+    <h1 class="text-center p-5 text-uppercase">Danh sách môn học</h1>
+  </div>
+    <div class="searchbar" style="margin: 40px auto;">
+      <div class="searchbar-wrapper">
+        <div class="searchbar-left">
+          <div class="search-icon-wrapper">
+            <span class="search-icon searchbar-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path
+                  d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+                </path>
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        <div class="searchbar-center">
+          <div class="searchbar-input-spacer"></div>
+          <input type="text" class="searchbar-input" maxlength="2048" name="q" autocapitalize="off" autocomplete="off"
+            title="Search" role="combobox" placeholder="Search Subject" ng-model="query" >
+        </div>
+        
+      </div>
+    </div>
+  <div class="container d-flex justify-content-evenly flex-wrap" ng-init = "filteredResults">
+    <div class="card-ui" data-ng-repeat="item in filteredResults = (subjects| filter : {Name: query}) |limitTo:5:begin" ng-if="filteredResults != 0">
+      <div class="card-img" style="margin-top: 10px; color: #000;" > 
+        <img style="width: 90%;height: 45%; border-radius: 10px;" ng-src="../img/{{item.Logo}}" alt="">
+      </div>
+      <div class="card-title" style="margin-top: 10px; color: #000;height: 50px;overflow: hidden;">
+        <h5>{{item.Name}}</h5>
+      </div>
+      <a ng-if="student" href="#subjects/{{item.Id}}" class="btn-main">GET START</a>
+      <a ng-if="!student" data-bs-toggle="modal" data-bs-target="#modalDangNhap" class="btn-main">GET START</a>
+    </div>
+  </div>
+  <h1 class="text-center p-5 text-uppercase" ng-if="filteredResults == 0">Không có môn học nào được tìm thấy</h1>
+  <nav style="width: 100%; margin: 50px 0; padding: 0 50px;" ng-if="filteredResults != 0"
+    aria-label="Page navigation example">
+    <ul class="pagination container d-flex justify-content-center flex-wrap">
+      <li class="page-item" ng-click="prev()">
+        <a class="btn page-link">Previous</a>
+      </li>
+      <li ng-repeat="n in [] | range:filteredResults.length/5" class="page-item">
+        <a class="btn page-link active" ng-if="begin == $index*5" ng-click="index($index)">{{$index + 1}}</a>
+        <a class="btn page-link" ng-if="begin != $index*5" ng-click="index($index)">{{$index + 1}}</a>
+      </li>
+      <li class="page-item" ng-click="next(filteredResults.length)">
+        <a class="btn page-link">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<!-- Modal bắt đăng nhập -->
+<div class="modal fade" id="modalDangNhap" tabindex="-1" aria-labelledby="modalDangNhap" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Thông báo</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <div class="alert alert-warning d-flex align-items-center" role="alert">
+                  <div>
+                      Bạn phải đăng nhập để làm bài kiểm tra
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button onclick="window.location.replace('#login')" class="btn btn-primary" data-bs-dismiss="modal">Đăng nhập</button>
+          </div>
+      </div>
+  </div>
+</div>
